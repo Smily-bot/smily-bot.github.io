@@ -15,10 +15,11 @@ canvas {
 var myGamePiece;
 var myObstacles = [];
 var myScore;
+var myBackground;
 
 function startGame() {
-    myGamePiece = new component(30, 30, "red", 10, 120);
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myGamePiece = new component(30, 30, "smiley.gif", 10, 120, "image");
+    myBackground = new component(656, 270, "citymarket.jpg", 0, 0, "image");
     myGameArea.start();
 }
 
@@ -42,6 +43,10 @@ var myGameArea = {
 
 function component(width, height, color, x, y, type) {
     this.type = type;
+if (type == "image" || type == "background") {
+    this.image = new Image();
+    this.image.src = color;
+  }
     this.width = width;
     this.height = height;
     this.speedX = 0;
@@ -50,6 +55,11 @@ function component(width, height, color, x, y, type) {
     this.y = y;    
     this.update = function() {
         ctx = myGameArea.context;
+if (type == "image" || type == "background") {
+      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+      if (type == "background") {
+        ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+      }
         if (this.type == "text") {
             ctx.font = this.width + " " + this.height;
             ctx.fillStyle = color;
@@ -57,6 +67,19 @@ function component(width, height, color, x, y, type) {
         } else {
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
+      }
+    } else {
+      ctx.fillStyle = color;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+    }
+  }
+  this.newPos = function() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.type == "background") {
+      if (this.x == -(this.width)) {
+        this.x = 0;
+      }
         }
     }
     this.newPos = function() {
@@ -81,6 +104,9 @@ function component(width, height, color, x, y, type) {
 }
 
 function updateGameArea() {
+    myBackground.newPos();
+    myBackground.update();
+    myBackground.speedX = -1;
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
