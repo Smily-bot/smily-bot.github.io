@@ -13,13 +13,13 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Brackeys
+title: smilybot
 description: > # this means to ignore newlines until "baseurl:"
-  Learn how to make games!
+  Hi I'm smilybot
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://brackeys.com" # the base hostname & protocol for your site
-twitter_username: BrackeysTweet
-github_username:  Brackeys
+url: "https://smilybot.com" # the base hostname & protocol for your site
+twitter_username: 
+github_username:  smily-bot
 
 #Global vars
 
