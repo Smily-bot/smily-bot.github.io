@@ -18,7 +18,7 @@ var myScore;
 
 function startGame() {
 	myBackground = new component(656, 270, "citymarket.jpg", 0, 0, "background");
-    myGamePiece = new component(30, 30, "red", 10, 120);
+    myGamePiece = new component(30, 30, "angry.gif", 10, 120);
     myGamePiece.gravity = 0.05;
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
     myGameArea.start();
@@ -139,6 +139,6 @@ function accelerate(n) {
 <br>
 <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
 <p>Click the ACCELERATE button to start the game</p>
-<p>How long can you stay alive? Use the ACCELERATE button to stay in the air..</p>
+<p>How long can you stay alive?</p>
 </body>
 </html>
