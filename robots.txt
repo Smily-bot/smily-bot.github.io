@@ -1,3 +1,17 @@
 User-Agent: *
-Disallow:
-Sitemap: https://www.amogos.studio/sitemap.xml
+Disallow: /
+
+
+User-Agent: Googlebot-Image
+Allow: */icons
+
+
+User-Agent: Googlebot
+Disallow: 
+
+
+User-Agent: Googlebot-Image
+Allow: */icons
+
+
+Sitemap: https://smily-bot.github.io/sitemap.xml
