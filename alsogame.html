@@ -115,6 +115,11 @@ function updateGameArea() {
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
+
+    myBackground.speedX = -1;
+    myBackground.newPos();
+    myBackground.update();
+	
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
         x = myGameArea.canvas.width;
         minHeight = 20;
@@ -133,9 +138,7 @@ function updateGameArea() {
     myScore.text="SCORE: " + myGameArea.frameNo;
     myScore.update();
     
-    myBackground.speedX = -1;
-    myBackground.newPos();
-    myBackground.update();
+    
     myGamePiece.newPos();
     myGamePiece.update();
     
