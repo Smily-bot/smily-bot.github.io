@@ -15,9 +15,10 @@ canvas {
 var myGamePiece;
 var myObstacles = [];
 var myScore;
+var myBackground;
 
 function startGame() {
-	myBackground = new component(656, 270, "citymarket.jpg", 0, 0, "background");
+    myBackground = new component(656, 270, "images.jpg", 0, 0, "background");
     myGamePiece = new component(30, 30, "angry.gif", 10, 120, "image");
     myGamePiece.gravity = 0.05;
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
@@ -41,7 +42,7 @@ var myGameArea = {
 
 function component(width, height, color, x, y, type) {
     this.type = type;
-if (type == "image") {
+if (type == "image" || type == "background") {
     this.image = new Image();
     this.image.src = color;
   }
@@ -60,11 +61,11 @@ if (type == "image") {
             ctx.font = this.width + " " + this.height;
             ctx.fillStyle = color;
             ctx.fillText(this.text, this.x, this.y);
-        } else if (type == "image") {
-      ctx.drawImage(this.image,
-        this.x,
-        this.y,
-        this.width, this.height);
+        } else if (type == "image" || type == "background") {
+      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+		if (type == "background") {
+        ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+      }
     } else { 
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -75,6 +76,11 @@ if (type == "image") {
         this.x += this.speedX;
         this.y += this.speedY + this.gravitySpeed;
         this.hitBottom();
+	    if (this.type == "background") {
+      if (this.x == -(this.width)) {
+        this.x = 0;
+      }
+    }
     }
     this.hitBottom = function() {
         var rockbottom = myGameArea.canvas.height - this.height;
@@ -127,8 +133,9 @@ function updateGameArea() {
     myScore.text="SCORE: " + myGameArea.frameNo;
     myScore.update();
     
-    
-    
+    myBackground.speedX = -1;
+    myBackground.newPos();
+    myBackground.update();
     myGamePiece.newPos();
     myGamePiece.update();
     
