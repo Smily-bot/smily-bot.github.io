@@ -23,12 +23,13 @@ var myObstacles = [];
 var myScore;
 
 function restartGame() {
+myGameArea.stop();
 myGameArea.clear();
 myGameArea = {};
 myGamePiece = {};
 myObstacles = [];
 myscore = {};
-startGame()
+startGame();
 }
 
 function startGame() {
