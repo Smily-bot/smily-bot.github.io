@@ -22,6 +22,15 @@ var myGamePiece;
 var myObstacles = [];
 var myScore;
 
+function restartGame() {
+myGameArea.stop();
+myGameArea.clear();
+myGameArea = {};
+myGamePiece = {};
+myObstacles = [];
+myscore = {};
+startGame()
+}
 
 function startGame() {
     myBackground = new component(656, 270, "images.jpg", 0, 0, "background");
@@ -41,6 +50,10 @@ var myGameArea = {
         this.frameNo = 0;
         updateGameArea();
         },
+	this.stop = function() {
+        clearInterval(this.interval);
+        this.pause = true;
+    },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
